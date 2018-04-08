@@ -1,0 +1,45 @@
+{
+  "name": "transport-management-service",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrueDevTeam/transport-management-service.git"
+  },
+  "author": "Bogdan Fedoronchuk",
+  "scripts": {
+    "test": "npm run eslint && npm run mocha",
+    "mocha": "mocha test/ --recursive --exit",
+    "eslint": "eslint src/. test/. --config .eslintrc",
+    "develop": "npm run eslint && nodemon ./src --watch src",
+    "prod": "node ./src",
+    "deploy": "shipit stage deploy"
+  },
+  "dependencies": {
+    "apollo-server-express": "^1.3.2",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "config": "^1.29.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "graphql": "^0.12.3",
+    "graphql-subscriptions": "^0.5.6",
+    "graphql-tools": "^2.18.0",
+    "graphql-type-json": "^0.1.4",
+    "jsonwebtoken": "^8.1.0",
+    "raven": "^2.3.0",
+    "subscriptions-transport-ws": "^0.9.5",
+    "uuid": "^3.2.1",
+    "winston": "^3.0.0-rc1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^4.0.1",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}

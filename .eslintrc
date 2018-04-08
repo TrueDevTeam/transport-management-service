@@ -1,0 +1,13 @@
+{
+  "extends": "standard",
+  "rules": {
+    "semi": 0,
+    "indent": ["error", 2]
+  },
+  "globals": {
+    "describe": true,
+    "it": true,
+    "before": true,
+    "after": true
+  }
+}
