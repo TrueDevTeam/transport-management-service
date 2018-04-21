@@ -11,9 +11,11 @@ const schema = require('./data/schema');
 const logger = require('./utils/logger');
 const encodingUtil = require('./utils/encoding-util');
 const tokenAccessMiddleware = require('./middleware/token-access');
+const sequelizeInstance = require('./data/connector/sequalize');
 const { NOT_FOUND } = require('./constants/constants');
 const { NO_ACCESS, MISSING_TOKEN } = require('./constants/error-messages');
 
+sequelizeInstance.sync();
 const graphqlPort = config.port;
 const subscriptionPort = config.subscriptionPort;
 
