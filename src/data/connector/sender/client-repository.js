@@ -32,6 +32,15 @@ class ClientRepository {
     }
     return Promise.resolve(client.dataValues);
   }
+
+  async getAll (companyId) {
+    const companySender = await CompanySender.findOne({
+      where: { parentId: companyId }
+    });
+    return Client.findAll({
+      where: { companySender: companySender.id }
+    });
+  }
 }
 
 module.exports = ClientRepository;

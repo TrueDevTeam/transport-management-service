@@ -14,7 +14,16 @@ const Query = {
       Raven.captureException(error);
       logger.error(error);
     }
-  }
+  },
+  getClients (root, args, context) {
+    const companyId = context.tokenPayload.companyId;
+    try {
+      return clientRepository.getAll(companyId);
+    } catch (error) {
+      Raven.captureException(error);
+      logger.error(error);
+    }
+  },
 }
 
 module.exports = Query;

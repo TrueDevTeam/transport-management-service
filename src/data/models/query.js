@@ -1,6 +1,7 @@
 const Query = `
 type Query {
   client(id: Int): Client
+  getClients: [Client]
 }
 `;
 
