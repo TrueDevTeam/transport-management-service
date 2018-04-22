@@ -15,7 +15,7 @@ class ClientRepository {
     });
   }
 
-  async insertClient (client, companyId) {
+  async insert (client, companyId) {
     const companySender = await CompanySender.findOne({where: { parentId: companyId }});
     if (!companySender.dataValues) {
       return Promise.reject();
