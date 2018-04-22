@@ -20,16 +20,9 @@ const Client = sequelizeInstance.define('client', {
   email: {
     type: Sequelize.STRING,
     allowNull: false
-  },
-  companySender: {
-    type: Sequelize.INTEGER,
-    required: true,
-    references: {
-      model: CompanySender,
-      key: 'id',
-      deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-    }
   }
 });
+
+Client.belongsTo(CompanySender, {foreignKey: 'companySender'});
 
 module.exports = Client;

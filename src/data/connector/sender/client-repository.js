@@ -11,6 +11,15 @@ class ClientRepository {
     const insertedClient = await Client.create(client);
     return Promise.resolve(insertedClient.dataValues);
   }
+
+  async getOne (clientId, companyId) {
+    const client = await Client.findOne({where: {id: clientId}, include: [{model: CompanySender}]});
+    const companySender = await CompanySender.findOne({where: { parentId: companyId }});
+    if (client.dataValues.companySender !== companySender.dataValues.id) {
+      return Promise.reject();
+    }
+    return Promise.resolve(client.dataValues);
+  }
 }
 
 module.exports = ClientRepository;
