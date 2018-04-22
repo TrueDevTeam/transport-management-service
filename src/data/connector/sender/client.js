@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 
 const sequelizeInstance = require('../sequalize');
+const CompanySender = require('./company-sender');
 
 const Client = sequelizeInstance.define('client', {
   id: {
@@ -20,9 +21,14 @@ const Client = sequelizeInstance.define('client', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  companySenderId: {
+  companySender: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    required: true,
+    references: {
+      model: CompanySender,
+      key: 'id',
+      deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+    }
   }
 });
 
