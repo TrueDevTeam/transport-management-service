@@ -4,8 +4,8 @@ type Driver {
   id: ID!
   fullName: String!
   birthday: String!
-  taxpayerId: Float!
-  region: Float!
+  taxpayerId: String!
+  region: String!
   imageUrl: String!
 }
 `;
