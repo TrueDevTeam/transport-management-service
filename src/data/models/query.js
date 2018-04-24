@@ -1,7 +1,8 @@
 const Query = `
 type Query {
   client(id: Int): Client
-  getClients: [Client]
+  allClients: [Client]
+  allCars: [Car]
 }
 `;
 

@@ -2,6 +2,12 @@ const Car = require('./car');
 const Company = require('./company');
 
 class CarRepository {
+  async getAll (companyId) {
+    return Car.findAll({
+      where: { companyId: companyId }
+    });
+  }
+
   async insert (car, companyId) {
     const company = await Company.findById(companyId);
     if (!company.dataValues) {
