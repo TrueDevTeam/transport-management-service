@@ -3,38 +3,34 @@ const Sequelize = require('sequelize');
 const sequelizeInstance = require('./sequalize');
 const Company = require('./company');
 
-const Car = sequelizeInstance.define('car', {
+const Driver = sequelizeInstance.define('driver', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  brand: {
+  fullName: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  model: {
+  birthday: {
+    type: Sequelize.DATE,
+    allowNull: false
+  },
+  taxpayerId: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  cargoType: {
+  region: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  carryingCapacity: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
-  fuelConsumption: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
-  stateNumber: {
+  imageUrl: {
     type: Sequelize.STRING,
     allowNull: false
   }
 });
 
-Car.belongsTo(Company, {foreignKey: 'companyId'});
+Driver.belongsTo(Company, {foreignKey: 'companyId'});
 
-module.exports = Car;
+module.exports = Driver;
