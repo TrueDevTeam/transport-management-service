@@ -1,4 +1,5 @@
 // todo add link to Company
+//todo add phone number
 const Driver = `
 type Driver {
   id: ID!
