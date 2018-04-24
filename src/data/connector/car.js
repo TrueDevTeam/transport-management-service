@@ -17,7 +17,7 @@ const Car = sequelizeInstance.define('car', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  cargoType: {
+  cargoType: { // todo make separate table
     type: Sequelize.STRING,
     allowNull: false
   },

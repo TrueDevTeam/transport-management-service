@@ -1,3 +1,4 @@
+// todo add link to Company
 const Driver = `
 type Driver {
   id: ID!

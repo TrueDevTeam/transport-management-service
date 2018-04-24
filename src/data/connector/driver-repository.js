@@ -14,7 +14,7 @@ class DriverRepository {
       return Promise.reject();
     }
     driver.companyId = company.dataValues.id;
-    const insertedDriver = await driver.create(driver);
+    const insertedDriver = await Driver.create(driver);
     return Promise.resolve(insertedDriver.dataValues);
   }
 }

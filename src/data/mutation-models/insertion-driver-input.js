@@ -2,8 +2,8 @@ const InsertionDriverInput = `
 input InsertionDriverInput {
   fullName: String!
   birthday: String!
-  taxpayerId: Float!
-  region: Float!
+  taxpayerId: String!
+  region: String!
   imageUrl: String!
 }
 `;

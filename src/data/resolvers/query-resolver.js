@@ -3,9 +3,11 @@ const Raven = require('../../utils/sentry-client');
 
 const ClientRepository = require('../connector/sender/client-repository');
 const CarRepository = require('../connector/car-repository');
+const DriverRepository = require('../connector/driver-repository');
 
 const clientRepository = new ClientRepository();
 const carRepository = new CarRepository();
+const driverRepository = new DriverRepository();
 
 const Query = {
   client (root, { id }, context) {
@@ -30,6 +32,15 @@ const Query = {
     const companyId = context.tokenPayload.companyId;
     try {
       return carRepository.getAll(companyId);
+    } catch (error) {
+      Raven.captureException(error);
+      logger.error(error);
+    }
+  },
+  allDrivers (root, args, context) {
+    const companyId = context.tokenPayload.companyId;
+    try {
+      return driverRepository.getAll(companyId);
     } catch (error) {
       Raven.captureException(error);
       logger.error(error);
