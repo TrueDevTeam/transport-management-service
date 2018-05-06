@@ -36,6 +36,15 @@ const Mutation = {
       Raven.captureException(error);
       logger.error(error);
     }
+  },
+  async deleteDriver (root, { id }, context) {
+    try {
+      const companyId = context.tokenPayload.companyId;
+      return driverRepository.delete(id, companyId);
+    } catch (error) {
+      Raven.captureException(error);
+      logger.error(error);
+    }
   }
 }
 
