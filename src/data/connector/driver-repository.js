@@ -1,24 +1,10 @@
 const Driver = require('./driver');
-const Company = require('./company');
-
+const CompanyRepository = require('./company-repository');
 const errorMessages = require('../../constants/error-messages');
 
-class DriverRepository {
-  /**
-   *
-   * @param companyId - id of company drivers is bound to
-   * @return: resolves {Promise.<company object>} - if such company exists
-   * @return: rejects {Promise.<error>} - if there is no such company
-   * @private
-   */
-  async _getCompany (companyId) {
-    const company = await Company.findById(companyId);
-    if (!company.dataValues) {
-      return Promise.reject();
-    }
-    return Promise.resolve(company.dataValues);
-  }
+const companyRepository = new CompanyRepository();
 
+class DriverRepository {
   async getAll (companyId) {
     return Driver.findAll({
       where: { companyId: companyId }
@@ -27,7 +13,7 @@ class DriverRepository {
 
   async insert (driver, companyId) {
     try {
-      const company = await this._getCompany(companyId);
+      const company = await companyRepository.get(companyId);
       driver.companyId = company.id;
       const insertedDriver = await Driver.create(driver);
       return Promise.resolve(insertedDriver.dataValues);
@@ -39,7 +25,7 @@ class DriverRepository {
 
   async delete (driverId, companyId) {
     try {
-      this._getCompany(companyId);
+      companyRepository.get(companyId);
     } catch (error) {
       return Promise.reject(new Error({
         msg: errorMessages.NO_ACCESS
