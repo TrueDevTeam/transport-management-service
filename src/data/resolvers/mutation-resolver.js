@@ -54,6 +54,15 @@ const Mutation = {
       Raven.captureException(error);
       logger.error(error);
     }
+  },
+  async deleteClient (root, { id }, context) {
+    try {
+      const companyId = context.tokenPayload.companyId;
+      return clientRepository.delete(id, companyId);
+    } catch (error) {
+      Raven.captureException(error);
+      logger.error(error);
+    }
   }
 }
 
