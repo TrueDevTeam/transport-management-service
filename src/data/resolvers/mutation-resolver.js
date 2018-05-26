@@ -4,10 +4,12 @@ const Raven = require('../../utils/sentry-client');
 const ClientRepository = require('../connector/sender/client-repository');
 const CarRepository = require('../connector/car-repository');
 const DriverRepository = require('../connector/driver-repository');
+const SendersWarehouseRepository = require('../connector/sender/warehouse-repository');
 
 const clientRepository = new ClientRepository();
 const carRepository = new CarRepository();
 const driverRepository = new DriverRepository();
+const sendersWarehouseRepository = new SendersWarehouseRepository();
 
 const Mutation = {
   async insertClient (root, { client }, context) {
@@ -32,6 +34,15 @@ const Mutation = {
     try {
       const companyId = context.tokenPayload.companyId;
       return driverRepository.insert(driver, companyId);
+    } catch (error) {
+      Raven.captureException(error);
+      logger.error(error);
+    }
+  },
+  async insertSendersWarehouse (root, { warehouse }, context) {
+    try {
+      const companyId = context.tokenPayload.companyId;
+      return sendersWarehouseRepository.insert(warehouse, companyId);
     } catch (error) {
       Raven.captureException(error);
       logger.error(error);
