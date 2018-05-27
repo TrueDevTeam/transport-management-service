@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 
 const sequelizeInstance = require('../sequalize');
 const CompanySender = require('./company-sender');
+const Client = require('./client');
 
 const Warehouse = sequelizeInstance.define('warehouse', {
   id: {
@@ -40,6 +41,13 @@ const Warehouse = sequelizeInstance.define('warehouse', {
 Warehouse.belongsTo(CompanySender, {
   foreignKey: {
     name: 'companySender',
+    allowNull: true
+  }
+});
+
+Warehouse.belongsTo(Client, {
+  foreignKey: {
+    name: 'clientId',
     allowNull: true
   }
 });

@@ -1,7 +1,8 @@
 const Mutation = `
 type Mutation {
   insertClient(client: InsertionClientInput): Client
-  insertSendersWarehouse(warehouse: InsertionSendersWarehouseInput): SendersWarehouse
+  insertSendersWarehouse(warehouse: InsertionWarehouseInput): SendersWarehouse
+  insertClientsWarehouse(warehouse: InsertionWarehouseInput): ClientsWarehouse
   insertCar(car: InsertionCarInput): Car
   insertDriver(driver: InsertionDriverInput): Driver
   deleteClient(id: Int): Client

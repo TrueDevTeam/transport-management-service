@@ -42,7 +42,20 @@ const Mutation = {
   async insertSendersWarehouse (root, { warehouse }, context) {
     try {
       const companyId = context.tokenPayload.companyId;
-      return sendersWarehouseRepository.insert(warehouse, companyId);
+      return sendersWarehouseRepository.insertSendersWarehouse(warehouse, companyId);
+    } catch (error) {
+      Raven.captureException(error);
+      logger.error(error);
+    }
+  },
+  async insertClientsWarehouse (root, { warehouse }, context) {
+    try {
+      const companyId = context.tokenPayload.companyId;
+      const clientId = warehouse.client;
+      if (!clientId) {
+        throw new Error('Client`s id should be provided')
+      }
+      return sendersWarehouseRepository.insertClientsWarehouse(warehouse, companyId, clientId);
     } catch (error) {
       Raven.captureException(error);
       logger.error(error);

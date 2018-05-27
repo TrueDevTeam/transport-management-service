@@ -1,12 +1,13 @@
 const Warehouse = require('./warehouse');
 const CompanySender = require('./company-sender');
 const CompanySenderRepository = require('./company-sender-repository');
+const ClientRepository = require('./client-repository');
 const Company = require('../company');
 const errorMessages = require('../../../constants/error-messages');
 
 const companySenderRepository = new CompanySenderRepository();
+const clientRepository = new ClientRepository();
 
-//todo refactor to sender`s warehouse repo
 class WarehouseRepository {
   async _getWarehouse (warehouseId) {
     return Warehouse.findOne({
@@ -20,11 +21,27 @@ class WarehouseRepository {
     });
   }
 
-  async insert (warehouse, companyId) {
-    const companySender = await companySenderRepository.get(companyId);
-    warehouse.companySender = companySender.id;
-    const insertedWarehouse = await Warehouse.create(warehouse);
-    return Promise.resolve(insertedWarehouse.dataValues);
+  async insertSendersWarehouse (warehouse, companyId) {
+    try {
+      const companySender = await companySenderRepository.get(companyId);
+      warehouse.companySender = companySender.id;
+      const insertedWarehouse = await Warehouse.create(warehouse);
+      return Promise.resolve(insertedWarehouse.dataValues);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+
+  }
+
+  async insertClientsWarehouse (warehouse, companyId, clientId) {
+    try {
+      const client = await clientRepository.getOne(clientId, companyId);
+      warehouse.clientId = client.id;
+      const insertedWarehouse = await Warehouse.create(warehouse);
+      return Promise.resolve(insertedWarehouse.dataValues);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
 
   async getAll (companyId) {
