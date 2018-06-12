@@ -44,7 +44,7 @@ class WarehouseRepository {
     }
   }
 
-  async getAll (companyId) {
+  async getAllSendersWarehouses (companyId) {
     const companySender = await CompanySender.findOne({
       where: { parentId: companyId }
     });

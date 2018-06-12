@@ -4,6 +4,7 @@ type Query {
   allClients: [Client]
   allCars: [Car]
   allDrivers: [Driver]
+  allSendersWarehouses: [SendersWarehouse]
 }
 `;
 
