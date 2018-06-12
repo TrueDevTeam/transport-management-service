@@ -53,6 +53,12 @@ class WarehouseRepository {
     });
   }
 
+  async getAllClientsWarehouses (clientId) {
+    return Warehouse.findAll({
+      where: { clientId }
+    });
+  }
+
   async delete (warehouseId, companyId) {
     try {
       companySenderRepository.get(companyId);

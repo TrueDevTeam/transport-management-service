@@ -5,6 +5,7 @@ type Client {
   number: String!
   email: String!
   companySender: CompanySender!
+  warehouses: [ClientsWarehouse]!
 }
 `;
 
