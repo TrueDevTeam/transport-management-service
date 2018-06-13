@@ -1,4 +1,6 @@
 const Car = require('./car');
+const CarCargoType = require('./car-cargo-type');
+const CargoType = require('./cargo-type');
 const CompanyRepository = require('./company-repository');
 const errorMessages = require('../../constants/error-messages');
 
@@ -14,8 +16,29 @@ class CarRepository {
   async insert (car, companyId) {
     const company = await companyRepository.get(companyId);
     car.companyId = company.id;
+    const cargoTypes = car.cargoTypes;
+
     const insertedCar = await Car.create(car);
+
+    for (let cargoType of cargoTypes) {
+      const carCargoType = {
+        carId: insertedCar.id,
+        cargoTypeId: cargoType
+      }
+      await CarCargoType.create(carCargoType);
+    }
+
     return Promise.resolve(insertedCar.dataValues);
+  }
+
+  async getCargoTypes(carId) {
+    const cargoTypes = await CarCargoType.findAll({
+      where: { carId },
+      include: [
+        { model: CargoType }
+      ]
+    });
+    return cargoTypes.map(carCargoType => carCargoType.cargo_type.title);
   }
 
   async delete (carId, companyId) {

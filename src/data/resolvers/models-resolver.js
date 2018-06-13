@@ -1,9 +1,11 @@
 const CompanySender = require('../connector/sender/company-sender');
 const ClientRepository = require('../connector/sender/client-repository');
 const WarehouseRepository = require('../connector/sender/warehouse-repository');
+const CarRepository = require('../connector/car-repository');
 
 const clientRepository = new ClientRepository();
 const warehouseRepository = new WarehouseRepository();
+const carRepository = new CarRepository();
 
 const ModelsResolver = {
   Client: {
@@ -22,6 +24,11 @@ const ModelsResolver = {
   ClientsWarehouse: {
     async client (client) {
       return clientRepository._getClient(client.id);
+    }
+  },
+  Car: {
+    async cargoTypes (car) {
+      return carRepository.getCargoTypes(car.id);
     }
   }
 }

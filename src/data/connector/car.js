@@ -17,10 +17,6 @@ const Car = sequelizeInstance.define('car', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  cargoType: { // todo make separate table many-many (1 car can have multiple cargo types)
-    type: Sequelize.STRING,
-    allowNull: false
-  },
   carryingCapacity: {
     type: Sequelize.FLOAT,
     allowNull: false

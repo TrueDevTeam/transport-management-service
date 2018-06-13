@@ -2,7 +2,7 @@ const InsertionCarInput = `
 input InsertionCarInput {
   brand: String!
   model: String!
-  cargoType: String!
+  cargoTypes: [Int]!
   carryingCapacity: Float!
   fuelConsumption: Float!
   stateNumber: String!
