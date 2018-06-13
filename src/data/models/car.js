@@ -4,7 +4,7 @@ type Car {
   id: ID!
   brand: String!
   model: String!
-  cargoTypes: [String]!
+  cargoTypes: [CargoType]!
   carryingCapacity: Float!
   fuelConsumption: Float!
   stateNumber: String!

@@ -5,6 +5,7 @@ type Query {
   allCars: [Car]
   allDrivers: [Driver]
   allSendersWarehouses: [SendersWarehouse]
+  allCargoTypes: [CargoType]
 }
 `;
 

@@ -5,6 +5,7 @@ const ClientRepository = require('../connector/sender/client-repository');
 const WarehouseRepository = require('../connector/sender/warehouse-repository');
 const CarRepository = require('../connector/car-repository');
 const DriverRepository = require('../connector/driver-repository');
+const CargoType = require('../connector/cargo-type');
 
 const clientRepository = new ClientRepository();
 const warehouseRepository = new WarehouseRepository();
@@ -52,6 +53,14 @@ const Query = {
     const companyId = context.tokenPayload.companyId;
     try {
       return warehouseRepository.getAllSendersWarehouses(companyId);
+    } catch (error) {
+      Raven.captureException(error);
+      logger.error(error);
+    }
+  },
+  allCargoTypes (root, args, context) {
+    try {
+      return CargoType.findAll();
     } catch (error) {
       Raven.captureException(error);
       logger.error(error);

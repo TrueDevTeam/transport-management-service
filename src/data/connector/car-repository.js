@@ -38,7 +38,7 @@ class CarRepository {
         { model: CargoType }
       ]
     });
-    return cargoTypes.map(carCargoType => carCargoType.cargo_type.title);
+    return cargoTypes.map(carCargoType => carCargoType.cargo_type);
   }
 
   async delete (carId, companyId) {
